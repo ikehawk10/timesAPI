@@ -15,31 +15,39 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+	<link rel="stylesheet" href="assets/styles.css" />
+
 	
 
 </head>
 <body>
 	<div class="container">
 		<header class="main-title text-center"> <!-- header area -->
-			<h1 class="title">New York Times Search</h1>
+			<h1 class="title"><span class="glyphicon glyphicon-modal-window"></span>New York Times Search</h1>
 		</header>
 
 		<div class="panel panel-default">
-  			<div class="panel-heading">Search Parameters</div>
-  			<label for="search-term">Search term:</label>
-  			<input type="text" class="form-control" id="search-term" placeholder="Search for...">
-  			<label for="numRecordsSelect">Number of Records to Retrieve:</label>
-  			<select class="form-control" id="numRecordsSelect">
-				<option value="1">1</option>
-				<option value="5" selected="">5</option>
-				<option value="10">10</option>
-			</select>
-			<label for="start-year">Start Year (Optional):</label>
-			 <input type="text" class="form-control" id="start-year">
-			 <label for="end-year">End Year (Optional):</label>
-			 <input type="text" class="form-control" id="end-year">
-			 <button class="btn btn-default" id="search-button">Search</button><button class="btn btn-default" id="button-clear">Clear Results</button>
-		</div>	
+			<div class="panel-heading"><span class="glyphicon glyphicon-list">Search Parameters</div>
+			<div class="panel panel-body">
+	  			<label for="search-term">Search term:</label>
+	  			<input type="text" class="form-control" id="search-term" placeholder="Search for...">
+	  			<label for="num-records-select">Number of Records to Retrieve:</label>
+	  			<select class="form-control" id="num-records-select">
+					<option value="1">1</option>
+					<option value="5" selected="">5</option>
+					<option value="10">10</option>
+				</select>
+				<label for="start-year">Start Year (Optional):</label>
+				 <input type="text" class="form-control" id="start-year">
+				 <label for="end-year">End Year (Optional):</label>
+				 <input type="text" class="form-control" id="end-year">
+				 <button class="btn btn-default" id="search-button"><span class="glyphicon glyphicon-search"></span>Search</button><button class="btn btn-default" id="button-clear"><span class="glyphicon glyphicon-trash"></span>Clear Results</button>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading"><span class="glyphicon glyphicon-calendar"></span>Top Articles</div>
+			<div class="panel panel-body"></div>
+		</div>
 	</div>
 
 	<!-- 	External JavaScript file -->
