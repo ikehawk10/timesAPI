@@ -1,0 +1,59 @@
+{
+  "response": {
+    "docs": [
+      {
+        "web_url": "string",
+        "snippet": "string",
+        "lead_paragraph": "string",
+        "abstract": "string",
+        "print_page": "string",
+        "blog": [
+          ""
+        ],
+        "source": "string",
+        "headline": {
+          "main": "string",
+          "kicker": "string"
+        },
+        "keywords": {
+          "rank": "string",
+          "name": "string",
+          "value": "string"
+        },
+        "pub_date": "string",
+        "document_type": "string",
+        "news_desK": "string",
+        "section_name": "string",
+        "subsection_name": "string",
+        "byline": {
+          "organization": "string",
+          "original": "string",
+          "person": [
+            ""
+          ]
+        },
+        "type_of_material": "string",
+        "_id": "string",
+        "word_count": "string",
+        "slideshow_credits": "string",
+        "multimedia": [
+          {
+            "url": "string",
+            "format": "string",
+            "height": 0,
+            "width": 0,
+            "type": "string",
+            "subtype": "string",
+            "caption": "string",
+            "copyright": "string"
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "hits": 0,
+      "time": 0,
+      "offset": 0
+    }
+  }
+}
