@@ -83,9 +83,11 @@ function grabDataFunc() {
   var inputEndYear = $("#end-year").val().trim();
 
   // check start & end year to see if user entered anything, default is zero if they didn't
-  if (inputStartYear != undefined) {
+  if (inputStartYear != "") {
     // validate year to make sure it isn't too short or too long
     isYearValidFunc(beginYearId,inputStartYear);
+    console.log("blank end year "+inputEndYear);
+    console.log("blank start year"+inputStartYear);
     // below will only run if isYearValidFunc doesn't make isDataValid false
     if(isDataValid===true) {
         $("#start-year").val(inputStartYear);
@@ -94,7 +96,7 @@ function grabDataFunc() {
         inputData[2].startYear+="0101";
       }
   }
-  if (inputEndYear != undefined) {
+  if (inputEndYear != "") {
     // validate year to make sure it isn't too short or too long
     isYearValidFunc(endYearId,inputEndYear);
     // below will only run if isYearValidFunc doesn't make isDataValid false
