@@ -2,7 +2,7 @@
 <html>
 <head lang="eng-us">
 	<meta charset="utf-8">
-	<title>NY Times API</title>
+	<title>New York Times Search</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -15,19 +15,23 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-	<link rel="stylesheet" href="assets/styles.css" />
+	<!-- Font Awesome -->   
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-	
+	<!-- Custom Stylesheet-->
+	<script src="https://use.fontawesome.com/a57ec281ad.js"></script>
+	<link rel="stylesheet" href="assets/styles.css" />
 
 </head>
 <body>
 	<div class="container">
 		<header class="main-title text-center"> <!-- header area -->
-			<h1 class="title"><span class="glyphicon glyphicon-modal-window"></span>New York Times Search</h1>
+			<h1 class="title"><i class="fa fa-newspaper-o" aria-hidden="true"></i>New York Times Search</h1>
 		</header>
 
-		<div class="panel panel-default">
-			<div class="panel-heading"><span class="glyphicon glyphicon-list">Search Parameters</div>
+
+		<div class="panel"> <!-- panel one section -->
+			<div class="panel-heading"><i class="fa fa-list" aria-hidden="true"></i>Search Parameters</div>
 			<div class="panel panel-body">
 	  			<label for="search-term">Search term:</label>
 	  			<input type="text" class="form-control" id="search-term" placeholder="Search for...">
@@ -41,12 +45,18 @@
 				 <input type="text" class="form-control" id="start-year">
 				 <label for="end-year">End Year (Optional):</label>
 				 <input type="text" class="form-control" id="end-year">
-				 <button class="btn btn-default" id="search-button"><span class="glyphicon glyphicon-search"></span>Search</button><button class="btn btn-default" id="button-clear"><span class="glyphicon glyphicon-trash"></span>Clear Results</button>
+				 <button class="btn" id="search-button"><i class="fa fa-search fa-lg"></i>Search</button><button class="btn" id="button-clear"><i class="fa fa-trash fa-lg"></i>Clear Results</button>
 			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading"><span class="glyphicon glyphicon-calendar"></span>Top Articles</div>
+		</div> <!-- /panel one section -->
+		<div class="panel"> <!-- panel two section -->
+			<div class="panel-heading"><i class="fa fa-table" aria-hidden="true"></i>Top Articles</div>
 			<div class="panel panel-body"></div>
+		</div> <!-- /panel two section -->
+		<div class="row">
+			<div class="col-md-12 text-center footer-text">
+				<hr />
+				<h5 class="h5"><small><i class="fa fa-heart"></i>Made by a wonderful bootcamp team<i class="fa fa-heart"></i></small></h5>
+			</div>
 		</div>
 	</div>
 
