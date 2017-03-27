@@ -144,6 +144,42 @@ function isYearFuncVal(yearQuery,queryParam) {
   return yearURLAddin;
 }
 
+function buildArticleResults(resultObj){
+  var title = resultObj.heading;
+  var author = resultObj.writer;
+  var summary = resultObj.snippet;
+  var articleURL = resultObj.webLink;
+
+  var theDiv = document.createElement("div");
+  $(theDiv).addClass("article-body");
+
+  var theHeadline = document.createElement("h1");
+  $(theHeadline).addClass("results-title");
+  $(theHeadline).html(title);
+
+  var theWriter = document.createElement("h4");
+  $(theWriter).addClass("results-author");
+  $(theWriter).html(author);
+
+  var theSnippet = document.createElement("p");
+  $(theSnippet).addClass("results-content");
+  $(theSnippet).html(summary);
+
+  var theLink = document.createElement("a");
+  $(theLink).addClass("results-url");
+  $(theLink).attr("href",articleURL);
+  $(theLink).attr("target","_blank");
+  $(theLink).html(articleURL);
+
+  console.log("all components built, now append all to theDiv");
+
+  $(theDiv).append(theHeadline,theWriter,theSnippet,theLink);
+  var prettyFormat = theDiv;
+  console.log("the styled div: "+theDiv);
+  return prettyFormat;
+
+}
+
 /** FUNCTION DEC:
     [uses the inputData array to create a query url and present results to the DOM] */
 function getArticlesFunc(){
@@ -173,16 +209,26 @@ function getArticlesFunc(){
         method: "GET"
       }).done(function(nytObj) {
 
+          var articleResultObj = {
+            heading : "",
+            writer : "",
+            snippet : "",
+            webLink : ""
+          };
 
           var responseArray = nytObj.response.docs;
+          var articleContainer = '<div class="article-body">';
+          var articleHeading = '<h1 class="results-title">';
 
           for (i=0;((i < (nytObj.response.docs).length) && (i < numSelect)); i++) {
-            var headline = responseArray[i].headline.main;
-            var author = responseArray[i].byline.original;
-            var summary = responseArray[i].lead_paragraph;
-            var articleURL = responseArray[i].web_url;
-            $("#article-results").append('<div>'+headline+'</div>'+'<div>'+author+'</div>'+'<div>'+summary+'</div>'+'<div>'+summary+'</div>'+'<div>'+articleURL+'</div>');
-
+            articleResultObj.heading = responseArray[i].headline.main;
+            articleResultObj.writer = responseArray[i].byline.original;
+            articleResultObj.snippet = responseArray[i].lead_paragraph;
+            articleResultObj.webLink = responseArray[i].web_url;
+            var styledResponse = buildArticleResults(articleResultObj);
+            console.log("styledResponse in the loop: "+styledResponse);
+            console.log("about to append to #article-results");
+            $("#article-results").append(styledResponse);
           }
 
 
