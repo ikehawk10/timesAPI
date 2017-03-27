@@ -171,18 +171,20 @@ function getArticlesFunc(){
     $.ajax({
         url: queryURL,
         method: "GET"
-      }).done(function(response) {
-          var responseArray = response.docs;
-          var headline = responseArray[x].headline.main;
-          var author = responseArray[x].byline.original;
-          var summary = responseArray[x].lead_paragraph;
-          var articleURL = responseArray[x].web_url;
+      }).done(function(nytObj) {
 
 
+          var responseArray = nytObj.response.docs;
 
-          //var searchTerms = $("inputData").val().trim();
+          for (i=0;((i < (nytObj.response.docs).length) && (i < numSelect)); i++) {
+            var headline = responseArray[i].headline.main;
+            var author = responseArray[i].byline.original;
+            var summary = responseArray[i].lead_paragraph;
+            var articleURL = responseArray[i].web_url;
+            $("#article-results").append('<div>'+headline+'</div>'+'<div>'+author+'</div>'+'<div>'+summary+'</div>'+'<div>'+summary+'</div>'+'<div>'+articleURL+'</div>');
 
-          console.log(response);
+          }
+
 
       });
 
