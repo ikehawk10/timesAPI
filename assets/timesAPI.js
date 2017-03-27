@@ -11,12 +11,12 @@ var inputData = [ {searchTerm  : ""},
                   {startYear   : "0"},
                   {endYear     : "0"} ];
 
-/*
+
 var inputObject = { searchTerm  : "",
                     numArticles : "",
-                    startYear   : "",
-                    endYear     : "" };
-*/
+                    startYear   : "0",
+                    endYear     : "0" };
+
 
 // a flag for data validation. If false program will not query the API
 var isDataValid = true;
@@ -28,6 +28,12 @@ var isDataValid = true;
  *
  **************************/
 
+function initInputData() {
+  inputData[0].searchTerm = "";
+  inputData[1].numArticles = "5";
+  inputData[2].startYear = "0";
+  inputData[3].endYear = "0";
+}
 
 /** FUNCTION DEC:
     [sets event handlers for buttons and form fields] */
@@ -71,9 +77,12 @@ function grabDataFunc() {
       $("#search-term").val("* This field is required *");
   }
   // get the search term
-  inputData[0].searchTerm = reqTerm;
+  var replaced = reqTerm.split(' ').join('+');
+  inputData[0].searchTerm = replaced;
+  inputObject.searchTerm = replaced;
   // get the number of records to return
   inputData[1].numArticles = $("#num-records-select").val();
+  inputObject.numArticles = $("#num-records-select").val();
 
   //----- Handle Year Collection and Validation-----
   // create variables for start year & end year to make conditionals more readable
@@ -92,8 +101,10 @@ function grabDataFunc() {
     if(isDataValid===true) {
         $("#start-year").val(inputStartYear);
         inputData[2].startYear = inputStartYear;
+        inputObject.startYear = inputStartYear;
         // append 0101 for Jan 1
         inputData[2].startYear+="0101";
+        inputObject.startYear+="0101";
       }
   }
   if (inputEndYear != "") {
@@ -103,8 +114,10 @@ function grabDataFunc() {
     if (isDataValid===true) {
       $("#end-year").val(inputEndYear);
       inputData[3].endYear = inputEndYear;
+      inputObject.endYear = inputEndYear;
       // append 1231 for Dec 31
       inputData[3].endYear+="1231";
+      inputObject.endYear+="1231";
     }
   }
   // just for testing
@@ -119,6 +132,19 @@ function clearDataFunc() {
 }
 
 /** FUNCTION DEC:
+    [takes a year ]*/
+function isYearFuncVal(yearQuery,queryParam) {
+  var yearURLAddin
+  if (yearQuery != "0") {
+    yearURLAddin = queryParam;
+    yearURLAddin+= yearQuery;
+  } else {
+    yearURLAddin = "";
+  }
+  return yearURLAddin;
+}
+
+/** FUNCTION DEC:
     [uses the inputData array to create a query url and present results to the DOM] */
 function getArticlesFunc(){
   // reset isDataValid to true in case user corrected a mistake and clicked submit again
@@ -129,10 +155,43 @@ function getArticlesFunc(){
   if (isDataValid) {
     // get the articles and display...
     console.log("ready to post articles");
-  } else {
+    var searchBox = inputData[0].searchTerm;
+    var numSelect = inputData[1].numArticles;
+    var yearStart = inputData[2].startYear;
+    var yearEnd = inputData[3].endYear;
+
+    var addbeginDate = isYearFuncVal(yearStart,"&begin_date:");
+    var addEndDate = isYearFuncVal(yearEnd, "&end_date:");
+    var timesAPIkey = "be5cc745c3c94ed9b9e7274a87544151";
+
+    var queryURL = "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + searchBox + addbeginDate + addEndDate+"&apikey="+timesAPIkey;
+    console.log(queryURL);
+    initInputData();
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).done(function(response) {
+          var responseArray = response.docs;
+          var headline = responseArray[x].headline.main;
+          var author = responseArray[x].byline.original;
+          var summary = responseArray[x].lead_paragraph;
+          var articleURL = responseArray[x].web_url;
+
+
+
+          //var searchTerms = $("inputData").val().trim();
+
+          console.log(response);
+
+      });
+
+    }
     // don't fetch articles if data validation unsuccessful
-    console.log("not ready to post articles");
-  }
+    else {
+
+      console.log("not ready to post articles");
+    }
 
 }
 
@@ -146,7 +205,7 @@ function getArticlesFunc(){
 $(document).ready(function() {
 
 // triggers event listeners and all logic that follows
-articleSearchFunc();
+  articleSearchFunc();
 
 
 });
